@@ -1,0 +1,14 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Allow all reads and writes for development (TEMPORARY)
+    match /{document=**} {
+      allow read, write: if true;
+    }
+    
+    // Specifically allow posts collection for API routes
+    match /posts/{postId} {
+      allow read, write: if true;
+    }
+  }
+}

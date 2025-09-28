@@ -1,7 +1,6 @@
 'use client';
-
 import Image from "next/image";
-import { useLanguage } from "D:/Rajee/app/context/LanguageContext";
+import { useLanguage } from "../context/LanguageContext";
 import { Mail, Phone, MapPin, MessageCircle } from "lucide-react";
 
 export default function CallCenterPage() {

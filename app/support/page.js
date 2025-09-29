@@ -31,7 +31,11 @@ export default function CallCenterPage() {
         <h1 className="text-4xl md:text-6xl font-extrabold text-white mb-6 leading-tight">
   {t("customerSupport")}
 </h1>
-
+  <p className="text-lg md:text-xl text-white/90">
+            {isRTL
+              ? "نحن هنا للرد على جميع استفساراتك ودعمك على مدار الساعة."
+              : "We’re here to answer your queries and support you 24/7."}
+          </p>
          
         </div>
 

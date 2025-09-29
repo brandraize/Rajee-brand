@@ -106,7 +106,7 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/report" className="text-gray-400 hover:text-white transition-colors text-sm">
+                <Link href="/issue" className="text-gray-400 hover:text-white transition-colors text-sm">
                   {isRTL ? 'الإبلاغ عن مشكلة' : 'Report Issue'}
                 </Link>
               </li>

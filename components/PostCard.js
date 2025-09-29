@@ -220,7 +220,7 @@ export default function PostCard({ post, isRTL }) {
           <div className={`flex items-center gap-3 ${isRTL ? 'flex-row-reverse' : ''}`}>
             <span className="inline-flex items-center gap-1"><Package2 className="h-4 w-4" />{productsCount}</span>
       <p className="text-sm text-gray-500">
-  Seller: {post.sellerName || 'Unknown'}
+ {post.sellerName || 'Unknown'}
 </p>
 
 
@@ -231,24 +231,28 @@ export default function PostCard({ post, isRTL }) {
           </div>
 
           <div className="flex items-center gap-2">
+                 <button
+  onClick={sharePost}
+  className="rounded-lg bg-green-600 text-white px-2 py-1  hover:bg-green-200 transition"
+  aria-label={isRTL ? 'مشاركة' : 'Share'}
+  title={isRTL ? 'مشاركة' : 'Share'} // tooltip on hover
+>
+  <Share2 className="h-5 w-5" />
+</button>
             <button
               onClick={() => setReportOpen(true)}
-              className="inline-flex items-center gap-1 rounded-lg bg-red-500 px-2.5 py-1.5 text-gray-700 hover:bg-red-400"
+              className="inline-flex items-center gap-1 rounded-lg bg-red-500 px-2.5 py-1.5 text-white hover:bg-red-400"
               aria-label="report"
             >
-              <Flag className="h-4 w-4" /> {isRTL ? 'إبلاغ' : 'Report'}
+              <Flag className="h-4 w-4" /> 
             </button>
+          
+          
             <Link href={`/listing/${post?.id}`} className="inline-flex items-center gap-1 rounded-lg bg-blue-600 px-3 py-1.5 text-white transition-colors hover:bg-blue-700">
-              <Eye className="h-4 w-4" /> {isRTL ? 'عرض' : 'View'}
+              <Eye className="h-4 w-4" /> 
             </Link>
           </div>
-          <button
-              onClick={sharePost}
-              className="inline-flex items-center gap-1 rounded-lg bg-green-600 px-3 py-1.5 text-white transition-colors hover:bg-green-700"
-              aria-label="share"
-            >
-              <Share2 className="h-4 w-4" /> {isRTL ? 'مشاركة' : 'Share'}
-            </button>
+         
         </div>
       </div>
       {/* Report Modal */}

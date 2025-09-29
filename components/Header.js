@@ -95,7 +95,7 @@ export default function Header() {
                   {userProfile?.profileImage ? (
                     <Image
                       src={userProfile.profileImage}
-                      alt={userProfile.name || "User Profile"}
+                      alt={userProfile.displayName || "User Profile"}
                       width={32} height={32}
                       className="rounded-full object-cover"
                       onError={(e) => { e.currentTarget.src = "/images/default-avatar.png"; }}
@@ -106,7 +106,7 @@ export default function Header() {
                       <User className="h-5 w-5 text-white" />
                     </div>
                   )}
-                  <span className="hidden sm:block">{user.displayName || user.email?.split("@")[0] || 'User'}</span>
+                  <span className="hidden sm:block">{userProfile?.name|| user.email?.split("@")[0] || 'User'}</span>
                   <ChevronDown className="h-4 w-4" />
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align={isRTL ? "start" : "end"} className="w-56 mt-2">
@@ -117,8 +117,10 @@ export default function Header() {
                     </div>
                   </DropdownMenuLabel>
                   <DropdownMenuSeparator />
+                  
                   <DropdownMenuItem asChild><Link href="/profile" className="flex items-center"><User className="mr-2 h-4 w-4" /> {isRTL ? 'الملف الشخصي' : 'Profile'}</Link></DropdownMenuItem>
                   <DropdownMenuItem asChild><Link href="/settings" className="flex items-center"><Settings className="mr-2 h-4 w-4" /> {isRTL ? 'الإعدادات' : 'Settings'}</Link></DropdownMenuItem>
+                
                   {(user?.email?.includes("admin")) && (
                     <>
                       <DropdownMenuSeparator />
@@ -152,7 +154,7 @@ export default function Header() {
           {/* Mobile Menu Button (opens Sidebar directly) */}
           <button className="md:hidden" onClick={() => setIsDrawerOpen(true)}>
             
-            <Menu className="w-6 h-6" />
+            <User className="w-6 h-6" />
           </button>
         </div>
       </div>
@@ -166,7 +168,15 @@ export default function Header() {
 
           {/* Render Sidebar component */}
           <div className={`absolute top-0 ${drawerSide} h-screen w-full md:w-80 z-[10000] bg-white`}>
-   <Sidebar isOpen={isDrawerOpen} setIsOpen={setIsDrawerOpen} />
+ <Sidebar
+  isOpen={isDrawerOpen}
+  setIsOpen={setIsDrawerOpen}
+  user={user}
+  userProfile={userProfile}
+  isRTL={isRTL}
+  setShowLogoutModal={setShowLogoutModal}
+/>
+
 
 
         

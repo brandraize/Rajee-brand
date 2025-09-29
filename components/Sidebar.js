@@ -5,10 +5,12 @@ import { useLanguage } from "../app/context/LanguageContext";
 import { useNavigation } from "../hooks/useNavigation";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { X, ChevronDown, Search, Plus, Minus } from "lucide-react";
+import { User, LogOut, Settings, Shield } from "lucide-react";
+import Link from "next/link";
+import Image from "next/image";
+import { ChevronRight } from "lucide-react";
 
-
-
-export default function Sidebar({ isOpen, setIsOpen }) {
+export default function Sidebar({ isOpen, setIsOpen,user ,userProfile,isRTLL, setShowLogoutModal}) {
   const { t, isRTL } = useLanguage();
   const { getFilteredCategoriesList } = useNavigation();
   const [filtersExpanded, setFiltersExpanded] = useState(true);
@@ -117,15 +119,72 @@ export default function Sidebar({ isOpen, setIsOpen }) {
 >
 
         <div className="p-4 relative">
-  {/* Close Button for small screens only */}
-  <button
-    onClick={() => setIsOpen(false)}
-    className="absolute top-4 right-4 p-2 rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 md:hidden"
-  >
-    <X className="w-5 h-5 text-gray-700" />
-  </button>
+ 
+  
+{user ? (
+  <div className="mt-auto px-4 pb-6">
+    <div className="flex items-center gap-3">
+      {userProfile?.profileImage ? (
+        <Image
+          src={userProfile.profileImage}
+          alt={userProfile.name || "User"}
+          width={40}
+          height={40}
+          className="rounded-full object-cover"
+        />
+      ) : (
+        <div className="h-10 w-10 rounded-full bg-blue-600 flex items-center justify-center">
+          <User className="h-5 w-5 text-white" />
+        </div>
+      )}
+      <div>
+        <p className="text-sm font-semibold">{user.displayName || user.email?.split("@")[0]}</p>
+        <p className="text-xs text-gray-500">{user.email}</p>
+      </div>
+    </div>
 
-  {/* ...rest of sidebar content */}
+    <div className="mt-4 flex flex-col gap-2">
+      <Link href="/profile" className="flex items-center text-sm text-gray-700 hover:text-blue-600" onClick={() => setIsOpen(false)} >
+        <User className="w-4 h-4 mr-2" />
+        {isRTL ? 'الملف الشخصي' : 'Profile'}
+      </Link>
+      <Link href="/settings" className="flex items-center text-sm text-gray-700 hover:text-blue-600" onClick={() => setIsOpen(false)} >
+        <Settings className="w-4 h-4 mr-2" />
+        {isRTL ? 'الإعدادات' : 'Settings'}
+      </Link>
+      {user?.email?.includes("admin") && (
+        <Link href="/admin/dashboard" className="flex items-center text-sm text-gray-700 hover:text-blue-600" onClick={() => setIsOpen(false)} >
+          <Shield className="w-4 h-4 mr-2" />
+          {isRTL ? 'لوحة الإدارة' : 'Admin Panel'}
+        </Link>
+      )}
+      <button
+        onClick={() => setShowLogoutModal(true)}
+        className="flex items-center text-sm text-red-600 hover:text-red-700 mt-2"
+      >
+        <LogOut className="w-4 h-4 mr-2" />
+        {isRTL ? 'تسجيل الخروج' : 'Sign Out'}
+      </button>
+    </div>
+  </div>
+) : (
+ 
+
+<div className="mt-auto px-4 pb-6">
+  <Link
+    href="/auth/login"
+    className="flex items-center justify-start gap-2 text-blue-600 hover:text-blue-800 cursor-pointer"
+    onClick={() => setIsOpen(false)}
+  >
+    <span>{isRTL ? 'تسجيل الدخول' : 'Login'}</span>
+    <ChevronRight className="w-4 h-4" />
+  </Link>
+</div>
+
+)}
+
+
+
 </div>
 
         <div className="p-4">
@@ -296,7 +355,13 @@ export default function Sidebar({ isOpen, setIsOpen }) {
               </div>
             </div>
           </div>
-          
+
+
+     
+
+
+
+
         </div>
       </div>
     </>

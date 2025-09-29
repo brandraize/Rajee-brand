@@ -212,6 +212,9 @@ export default function AdminLayout({ children }) {
   <Link href="/admin/customerMsg" className="block px-3 py-2 rounded hover:bg-gray-50">
     {isRTL ? 'رسائل العملاء' : 'Customer Messages'}
   </Link>
+    <Link href="/admin/reportedissues" className="block px-3 py-2 rounded hover:bg-gray-50">
+    {isRTL ? 'القضايا المُبلّغ عنها': 'Reported Issues'}
+  </Link>
 </li>
 
               </ul>

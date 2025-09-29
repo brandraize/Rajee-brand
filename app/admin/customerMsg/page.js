@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { Mail, User, MessageCircle, Reply } from 'lucide-react';
-import { useLanguage } from '../../context/LanguageContext'; // for RTL and translations
+import { useLanguage } from '../../context/LanguageContext';
 
 export default function CustomerMsg() {
   const [messages, setMessages] = useState([]);
@@ -31,18 +31,18 @@ export default function CustomerMsg() {
   return (
     <div className={`max-w-7xl mx-auto p-6 min-h-screen ${isRTL ? 'rtl' : 'ltr'}`}>
       <h1 className="text-4xl font-extrabold mb-8 text-center text-gray-900">
-        {t ? t('CustomerMessages') : 'Customer Messages'}
+        {t ? t('customerMessages') : 'Customer Messages'}
       </h1>
 
-      {loading && <p className="text-center text-gray-600">Loading messages...</p>}
+      {loading && <p className="text-center text-gray-600">{t ? t('loading') : 'Loading messages...'}</p>}
       {error && <p className="text-center text-red-600 font-semibold">Error: {error}</p>}
       {!loading && !error && messages.length === 0 && (
-        <p className="text-center text-gray-700">No customer messages found.</p>
+        <p className="text-center text-gray-700">{t ? t('noMessages') : 'No customer messages found.'}</p>
       )}
 
       {!loading && !error && messages.length > 0 && (
         <div className="bg-white shadow-lg rounded-xl overflow-x-auto border border-gray-200">
-          <div className="grid grid-cols-12 bg-gray-100 text-sm font-semibold text-gray-700 border-b px-4 py-3">
+          <div className="grid grid-cols-12 bg-gray-100 text-sm font-semibold text-gray-700 border-b px-4 py-3 select-none">
             <div className="col-span-2 flex items-center gap-2">
               <User className="w-4 h-4" />
               {t ? t('name') : 'Name'}

@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useLanguage } from '../app/context/LanguageContext';
 import { Mail, Phone, MapPin, Twitter, Instagram, Youtube, Facebook, Heart } from 'lucide-react';
-
+import Image from 'next/image';
 export default function Footer() {
   const { t, isRTL } = useLanguage();
   const currentYear = new Date().getFullYear();
@@ -16,12 +16,9 @@ export default function Footer() {
           {/* Company Info */}
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">R</span>
-              </div>
-              <span className="text-xl font-bold" style={{ fontFamily: isRTL ? 'Cairo, sans-serif' : 'Inter, sans-serif' }}>
-                {isRTL ? 'رجيع' : 'Rajee'}
-              </span>
+             <Image src="/images/logo.png" alt="Logo" width={70} height={20} />
+             
+             
             </div>
             <p className="text-gray-400 text-sm leading-relaxed" style={{ fontFamily: isRTL ? 'Cairo, sans-serif' : 'Inter, sans-serif' }}>
               {isRTL 
@@ -151,7 +148,7 @@ export default function Footer() {
               <Link href="/privacypolicy" className="text-gray-400 hover:text-white transition-colors">
                 {isRTL ? 'سياسة الخصوصية' : 'Privacy Policy'}
               </Link>
-              <Link href="/terms" className="text-gray-400 hover:text-white transition-colors">
+              <Link href="/termservices" className="text-gray-400 hover:text-white transition-colors">
                 {isRTL ? 'شروط الاستخدام' : 'Terms of Service'}
               </Link>
               <Link href="/cookies" className="text-gray-400 hover:text-white transition-colors">

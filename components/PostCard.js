@@ -170,11 +170,11 @@ export default function PostCard({ post, isRTL }) {
   return (
     
     <div className="group relative overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all hover:shadow-lg">
-     
-      <div className="relative aspect-[16/9] bg-gray-100">
-    <Link href={`listing/${post.id}`}>
-         <div className="grid grid-cols-3 gap-1 h-40">
-          {/* the images are sliced in the three and render through  map method added clasess for the hover effect    */}
+      <Link href={`listing/${post.id}`}>
+   
+   
+         <div className="grid grid-cols-3 gap-1 h-56">
+       
            
     {post?.images?.slice(0, 3).map((img, idx) => (
       
@@ -191,7 +191,7 @@ export default function PostCard({ post, isRTL }) {
       </div>
     ))}
   </div>
-   </Link>
+  
         <button
           aria-label="favorite"
           onClick={toggleFavorite}
@@ -203,15 +203,33 @@ export default function PostCard({ post, isRTL }) {
         <div className="absolute left-3 top-3">
           <StatusBadge status={post?.status} isRTL={isRTL} />
         </div>
-      </div>
-
+      
+ </Link>
       <div className="p-4">
-        <div className={`flex items-start justify-between gap-3 ${isRTL ? 'flex-row-reverse' : ''}`}>
-          <h4 className="line-clamp-1 text-base font-semibold text-gray-900">{post?.title}</h4>
-          <span className="shrink-0 rounded-lg bg-blue-50 px-2.5 py-1 text-sm font-semibold text-blue-700">
-            {formatCurrency(post?.price, isRTL)}
-          </span>
-        </div>
+       <div className={`flex items-start justify-between gap-3 ${isRTL ? 'flex-row-reverse' : ''}`}>
+  {isRTL ? (
+    <>
+      {/* Arabic: Price on the left, Title on the right */}
+      <span className="shrink-0 rounded-lg bg-blue-50 px-2.5 py-1 text-sm font-semibold text-blue-700">
+        {formatCurrency(post?.price, isRTL)}
+      </span>
+      <h4 className="line-clamp-1 text-base font-semibold text-gray-900 text-right">
+        {post?.title}
+      </h4>
+    </>
+  ) : (
+    <>
+      {/* English: Title on the left, Price on the right */}
+      <h4 className="line-clamp-1 text-base font-semibold text-gray-900 text-left">
+        {post?.title}
+      </h4>
+      <span className="shrink-0 rounded-lg bg-blue-50 px-2.5 py-1 text-sm font-semibold text-blue-700">
+        {formatCurrency(post?.price, isRTL)}
+      </span>
+    </>
+  )}
+</div>
+
 
         <p className={`mt-1 line-clamp-2 text-sm text-gray-600 ${isRTL ? 'text-right' : 'text-left'}`}>{post?.description}</p>
 
@@ -219,10 +237,9 @@ export default function PostCard({ post, isRTL }) {
         <div className={`mt-3 flex items-center justify-between text-xs text-gray-500 ${isRTL ? 'flex-row-reverse' : ''}`}>
           <div className={`flex items-center gap-3 ${isRTL ? 'flex-row-reverse' : ''}`}>
             <span className="inline-flex items-center gap-1"><Package2 className="h-4 w-4" />{productsCount}</span>
-      <p className="text-sm text-gray-500">
+      <p className="text-sm text-gray-900">
  {post.sellerName || 'Unknown'}
 </p>
-
 
             {post?.createdAt?.toDate && (
               <span className="inline-flex items-center gap-1"><Clock className="h-4 w-4" />{post.createdAt.toDate().toLocaleDateString()}</span>
@@ -233,7 +250,7 @@ export default function PostCard({ post, isRTL }) {
           <div className="flex items-center gap-2">
                  <button
   onClick={sharePost}
-  className="rounded-lg bg-green-600 text-white px-2 py-1  hover:bg-green-200 transition"
+  className="rounded-lg bg-green-500 text-white px-2 py-1  hover:bg-green-400 transition"
   aria-label={isRTL ? 'مشاركة' : 'Share'}
   title={isRTL ? 'مشاركة' : 'Share'} // tooltip on hover
 >

@@ -170,16 +170,37 @@ export default function Sidebar({ isOpen, setIsOpen,user ,userProfile,isRTLL, se
 ) : (
  
 
-<div className="mt-auto px-4 pb-6">
+
+
+<div className="block lg:hidden mt-auto px-4 ">
   <Link
     href="/auth/login"
-    className="flex items-center justify-start gap-2 text-blue-600 hover:text-blue-800 cursor-pointer"
     onClick={() => setIsOpen(false)}
+    className="flex items-center mb-5 justify-between w-full px-4 py-2 bg-blue-50 text-blue-700 rounded-md hover:bg-blue-100 transition-all shadow-sm"
   >
-    <span>{isRTL ? 'تسجيل الدخول' : 'Login'}</span>
+    <span className="text-sm font-medium">
+      {isRTL ? 'تسجيل الدخول' : 'Login'}
+    </span>
     <ChevronRight className="w-4 h-4" />
   </Link>
+<span className="mt-6">
+
+
+   <Link
+    href="/auth/register"
+    onClick={() => setIsOpen(false)}
+    className="flex items-center justify-between w-full px-4 py-2 bg-blue-50 text-blue-700 rounded-md hover:bg-blue-100 transition-all shadow-sm"
+  >
+    <span className="text-sm font-medium">
+      {isRTL ? 'إنشاء حسابك' : 'Create Account'}
+    </span>
+    <ChevronRight className="w-4 h-4" />
+  </Link>
+  </span>
 </div>
+
+
+
 
 )}
 
@@ -335,7 +356,8 @@ export default function Sidebar({ isOpen, setIsOpen,user ,userProfile,isRTLL, se
               className="flex w-full cursor-pointer items-center justify-between font-bold"
               onClick={() => setQuickNavigateExpanded(!quickNavigateExpanded)}
             >
-              <span>Quick Navigate</span>
+         <span>{isRTL ? 'التنقل السريع' : 'Quick Navigate'}</span>
+
               {quickNavigateExpanded ? <Minus size={16} /> : <Plus size={16} />}
             </button>
             <div className={`select-none transition-all duration-150 ${quickNavigateExpanded ? 'block' : 'hidden'}`}>

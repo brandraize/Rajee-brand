@@ -151,11 +151,18 @@ export default function Header() {
             </button>
           </div>
 
-          {/* Mobile Menu Button (opens Sidebar directly) */}
-          <button className="md:hidden" onClick={() => setIsDrawerOpen(true)}>
-            
-            <User className="w-6 h-6" />
-          </button>
+       {/* Mobile Menu Button (opens Sidebar directly) */}
+<div className="md:hidden flex items-center gap-4 px-4 py-3 bg-[#112A4A] text-white justify-end">
+  <button onClick={toggleLanguage} aria-label="Toggle Language" className="flex items-center gap-1 hover:text-blue-200 transition-colors">
+    <Globe className="w-6 h-6" />
+     <span>{language === "en" ? "العربية" : "English"}</span>
+  </button>
+
+  <button onClick={() => setIsDrawerOpen(true)} aria-label="Open menu">
+    <User className="w-6 h-6" />
+  </button>
+</div>
+
         </div>
       </div>
 

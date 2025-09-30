@@ -297,9 +297,7 @@ export default function RegisterPage() {
 
           {/* Login Link */}
           <div className={`text-center ${isRTL ? 'text-right' : 'text-left'}`}>
-            <p className="text-gray-600 mb-4">
-              {isRTL ? 'لديك حساب بالفعل؟' : 'Already have an account?'}
-            </p>
+           
             <Link
               href="/auth/login"
               className="inline-flex items-center justify-center w-full px-4 py-3 border-2 border-green-600 text-green-600 rounded-lg font-semibold hover:bg-green-50 transition-colors duration-200"

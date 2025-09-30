@@ -329,7 +329,8 @@ const discardDraft = () => {
               </label>
               <input
                 type="text"
-            value={isRTL ? city.name.ar : city.name.en}
+          value={isRTL ? city?.name?.ar || '' : city?.name?.en || ''}
+
 
                 disabled
                 className="w-full border border-gray-300 p-3 rounded-lg bg-gray-50 text-gray-600"
